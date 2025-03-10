@@ -9,11 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(RAYLIB_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include/raylib")
 set(RAYLIB_LIBRARY "${CMAKE_SOURCE_DIR}/libraylib.dll") # Directly reference the DLL
 
-# Include raylib headers
-include_directories(${RAYLIB_INCLUDE_DIR})
-
-# Add include directory
-include_directories("${CMAKE_SOURCE_DIR}/include/")
+# Include both raylib headers and general include directory
+include_directories(
+    ${RAYLIB_INCLUDE_DIR}
+    ${CMAKE_SOURCE_DIR}/include/
+)
 
 # Add source files
 set(SOURCES
@@ -21,6 +21,14 @@ set(SOURCES
     src/ball.cpp
 )
 
-# Configure primatives executable
+# Configure executable
 add_executable(raylib_dll_test ${SOURCES}) # Add executable
 target_link_libraries(raylib_dll_test ${RAYLIB_LIBRARY}) # Link raylib dynamically (for MinGW or MSVC)
+
+# Ensure Windows finds the DLL at runtime (this automatically copies the raylib dll file to the build folder)
+if (WIN32)
+    add_custom_command(TARGET raylib_dll_test POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${RAYLIB_LIBRARY}
+        $<TARGET_FILE_DIR:raylib_dll_test>)
+endif()
