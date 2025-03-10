@@ -23,4 +23,4 @@ set(SOURCES
 
 # Configure primatives executable
 add_executable(raylib_dll_test ${SOURCES}) # Add executable
-target_link_libraries(raylib_dll_test ${RAYLIB_LIBRARY}) # Link SDL3 dynamically (for MinGW or MSVC)
+target_link_libraries(raylib_dll_test ${RAYLIB_LIBRARY}) # Link raylib dynamically (for MinGW or MSVC)
