@@ -5,7 +5,7 @@ project(raylib_dll_test)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Define SDL2 paths
+# Define raylib paths
 set(RAYLIB_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include/raylib")
 set(RAYLIB_LIBRARY "${CMAKE_SOURCE_DIR}/libraylib.dll") # Directly reference the DLL
 
