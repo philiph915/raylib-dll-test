@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.10)
+project(raylib_dll_test)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Define SDL2 paths
+set(RAYLIB_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include/raylib")
+set(RAYLIB_LIBRARY "${CMAKE_SOURCE_DIR}/libraylib.dll") # Directly reference the DLL
+
+# Include raylib headers
+include_directories(${RAYLIB_INCLUDE_DIR})
+
+# Add include directory
+include_directories("${CMAKE_SOURCE_DIR}/include/")
+
+# Add source files
+set(SOURCES
+    src/main.cpp
+    src/ball.cpp
+)
+
+# Configure primatives executable
+add_executable(raylib_dll_test ${SOURCES}) # Add executable
+target_link_libraries(raylib_dll_test ${RAYLIB_LIBRARY}) # Link SDL3 dynamically (for MinGW or MSVC)
