@@ -16,10 +16,8 @@ include_directories(
 )
 
 # Add source files
-set(SOURCES
-    src/main.cpp
-    src/ball.cpp
-)
+file(GLOB SOURCES "src/*.cpp" "src/*.c") # this automatically grabs everything in src/ (but not its subdirectories)
+# file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.c") # this automatically grabs everything in src/ AND its subdirectories!
 
 # Configure executable
 add_executable(raylib_dll_test ${SOURCES}) # Add executable
